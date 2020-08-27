@@ -55,7 +55,7 @@ namespace _2.Flow_Console
                 client.AddTicket(age);
                 Ticket[] tickets = client.GetTickets();
                 int cost = 0;
-                if (age < 0)
+                if (age < 2)
                 {
                      cost = 0;
                 }
