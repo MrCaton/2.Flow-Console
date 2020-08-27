@@ -47,61 +47,37 @@ namespace _2.Flow_Console
         private static void Add()
         {
             Console.WriteLine("Add the age of the costumer, Quit with 0");
-            //Ticket[] tickets = client.GetTickets();
             do
             {
                 int age = Util.AskForInt("Age: ");
                 if (age == 0) break;
                 client.AddTicket(age);
                 Ticket[] tickets = client.GetTickets();
-                int cost = 0;
-                if (age < 2)
-                {
-                     cost = 0;
-                }
-                else if (age < 20)
-                {
-                     cost = 80;
-                }
-                else if (age < 64)
-                {
-                     cost = 120;
-                }
-                else if (age < 100)
-                {
-                     cost = 90;
-                }
-                else
-                {
-                     cost = 0;
-                }
-                int tot = 0;
-
-                
-                
-
-                foreach (Ticket ticket in tickets)
-                {
-                    Console.WriteLine(ticket);
-
-                    Console.WriteLine(ticket.TicketCost.Equals(TicketCost.Youth) ?
-                        YouthTicket() : (
-                        ticket.TicketCost.Equals(TicketCost.Adult) ?
-                        AdultTicket() : (
-                        ticket.TicketCost.Equals(TicketCost.Pension) ?
-                        PensionTicket() :
-                        FreeTicket())));
-                    tot = tot + cost;
-                    Console.WriteLine($"The total amount is {tot}");
-                }
-                
-
-            } while (true);
-
-
             
-        }
+            int tot = 0;
 
+            foreach (Ticket ticket in tickets)
+            {
+                
+                Console.WriteLine(ticket);
+
+                Console.WriteLine(ticket.TicketCost.Equals(TicketCost.Youth) ?
+                    YouthTicket() : (
+                    ticket.TicketCost.Equals(TicketCost.Adult) ?
+                    AdultTicket() : (
+                    ticket.TicketCost.Equals(TicketCost.Pension) ?
+                    PensionTicket() :
+                    FreeTicket())));
+                int price = (int)ticket.TicketCost;
+            tot = tot + price;
+                Console.WriteLine($"The total amount is {tot}");
+
+
+            }
+            
+
+        } while (true);
+}
 
         private static string PensionTicket()
         {
