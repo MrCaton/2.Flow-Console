@@ -1,4 +1,5 @@
-﻿using System;
+using System;
+using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading;
@@ -18,8 +19,9 @@ namespace _2.Flow_Console
 
         private static void PrintMeny()
         {
-            Console.WriteLine("1. Next menu");
-            Console.WriteLine("2. Total");
+            Console.WriteLine("1. Menu 1");
+            Console.WriteLine("2. Menu 2");
+            Console.WriteLine("3. Menu 3");
             Console.WriteLine("0. Quit");
 
             switch (Console.ReadLine())
@@ -28,7 +30,10 @@ namespace _2.Flow_Console
                     Add();
                     break;
                 case "2":
-                    Print();
+                    Repite();
+                    break;
+                case "3":
+                    Sentence();
                     break;
                 case "0":
                     Environment.Exit(0);
@@ -41,7 +46,7 @@ namespace _2.Flow_Console
         private static void Print()
         {
             Ticket[] tickets = client.GetTickets();
-            int total = 0;
+            //int total = 0;
             //int n = tickets.Sum();
             //for(int i=0;i<n;i++)
             //{
@@ -62,28 +67,40 @@ namespace _2.Flow_Console
 
 
             }
-            Console.WriteLine($"Total:{total}");
+            // Console.WriteLine($"Total:{total}");
         }
 
 
         private static void Add()
         {
             Console.WriteLine("Add the age of the costumer, Quit with 0");
-
+            //Ticket[] tickets = client.GetTickets();
             do
             {
                 int age = Util.AskForInt("Age: ");
-                if (age == 0) break; 
+                if (age == 0) break;
                 client.AddTicket(age);
                 Ticket[] tickets = client.GetTickets();
 
-                
+                foreach (Ticket ticket in tickets)
+                {
+                    Console.WriteLine(ticket);
+
+                    Console.WriteLine(ticket.TicketCost.Equals(TicketCost.Youth) ?
+                        YouthTicket() : (
+                        ticket.TicketCost.Equals(TicketCost.Adult) ?
+                        AdultTicket() : (
+                        ticket.TicketCost.Equals(TicketCost.Pension) ?
+                        PensionTicket() :
+                        FreeTicket())));
+                }
 
             } while (true);
-            
+
+
 
         }
-    
+
 
         private static string PensionTicket()
         {
@@ -104,6 +121,43 @@ namespace _2.Flow_Console
         {
             return "The ticket costs 120 SEK";
         }
-    }
-}
+        private static void Repite()
+        {
+            Console.WriteLine("Write a sentence, Quit with 0");
+            do
+            {
+                string text = Util.AskForString("Text: ");
+                if (text == "0") break;
+                //client.AddTicket(text);
+                //Ticket[] tickets = client.GetTickets();
 
+                for (int i = 0; i < 10; i++)
+                {
+                    Console.WriteLine(text);
+                }
+
+
+
+            } while (true);
+
+
+
+        }
+        private static void Sentence()
+        {
+            Console.WriteLine("Write a sentence, Quit with 0");
+            do
+            {
+                string sep = Util.AskForString("Sentence: ");
+                if (sep == "0") break;
+                Console.WriteLine(sep.Split(' ')[2]);
+
+
+
+
+            } while (true);
+
+        }
+    }
+
+}
