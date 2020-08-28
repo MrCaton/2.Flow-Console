@@ -127,7 +127,14 @@ namespace _2.Flow_Console
             {
                 string sep = Util.AskForString("Sentence: ");
                 if (sep == "0") break;
-                Console.WriteLine(sep.Split(' ')[2]);
+                else if(sep.Split(' ').Count()<3)
+                {
+                    Console.WriteLine("Write a sentence with more than 3 character");
+                }
+                else
+                {
+                    Console.WriteLine(sep.Split(' ')[2]);
+                }
 
 
 
